@@ -111,7 +111,7 @@
     },
     methods: {
       login () {
-        this.$router.push("/admin")
+        this.$router.push("/welcome")
       // let _this = this;
         // 将明文存储到缓存中
         // let passwordShow = _this.user.password;

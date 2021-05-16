@@ -26,7 +26,7 @@ export default new Router({
             component: () => import("@/views/Resign.vue")
         },
         {
-            path: "/admin",
+            path: "/",
             name: "admin",
             component: () => import("@/views/admin"),
             children:[{
@@ -35,7 +35,7 @@ export default new Router({
                 component:() => import("@/views/admin/welcome")
             },{
                 path:"business/chapter",
-                name:"chapter",
+                name:"business/chapter",
                 component:() => import("@/views/admin/chapter")
             }]
         },
