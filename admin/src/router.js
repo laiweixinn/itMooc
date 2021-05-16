@@ -34,7 +34,7 @@ export default new Router({
                 name:"welcome",
                 component:() => import("@/views/admin/welcome")
             },{
-                path:"chapter",
+                path:"business/chapter",
                 name:"chapter",
                 component:() => import("@/views/admin/chapter")
             }]

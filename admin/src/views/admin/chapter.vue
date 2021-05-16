@@ -978,7 +978,10 @@
 
 <script>
 export default {
-name: "chapter.vue"
+name: "chapter.vue",
+  mounted:function () {
+  this.$parent.activeSidebar("business-chapter-sidebar");
+  }
 }
 </script>
 
