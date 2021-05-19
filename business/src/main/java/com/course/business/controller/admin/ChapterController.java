@@ -21,7 +21,7 @@ public class ChapterController {
     @Resource
     private ChapterService chapterService;
     @RequestMapping("/list")
-   public PageDto lsit(@RequestBody PageDto pageDto){
+   public PageDto list(@RequestBody PageDto pageDto){
         LOG.info("pageDto;{}",pageDto);
         chapterService.list( pageDto);
         return pageDto;
