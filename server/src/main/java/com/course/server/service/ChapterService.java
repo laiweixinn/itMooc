@@ -5,11 +5,12 @@ import com.course.server.domain.ChapterExample;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
-import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -25,7 +26,7 @@ public class ChapterService {
         ChapterExample chapterExample = new ChapterExample();
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         PageInfo<Chapter> pageInfo=new PageInfo<>(chapterList);
-        pageDto.setTotal(pageDto.getTotal());
+        pageDto.setTotal(pageInfo.getTotal());
         List<ChapterDto> chapterDtoList=new ArrayList<ChapterDto>();
    for (int i = 0, l = chapterList.size(); i < l; i++){
        Chapter chapter=chapterList.get(i);
@@ -35,4 +36,21 @@ public class ChapterService {
   }
    pageDto.setList(chapterDtoList);
     }
+
+    /**
+     * 保存，id有值时更新，无值时新增
+     */
+    public void save(ChapterDto chapterDto) {
+//        Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
+//        if (StringUtils.isEmpty(chapterDto.getId())) {
+//            this.insert(chapter);
+//        } else {
+//            this.update(chapter);
+//        }
+        chapterDto.setId(UuidUtil.getShortUuid());
+        Chapter chapter=new Chapter();
+        BeanUtils.copyProperties(chapterDto,chapter);
+        chapterMapper.insert(chapter);
+    }
+
 }

@@ -11,7 +11,9 @@
     刷新
   </button>
   </p>
+
   <pagination ref="pagination" v-bind:list="list" v-bind:itemCount="8"></pagination>
+
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
@@ -93,14 +95,14 @@
           <form class="form-horizontal">
             <div class="form-group">
               <label class="col-sm-2 control-label">名称</label>
-              <div class="form-group">
-                <input class="form-control" placeholder="名称">
+              <div class="col-sm-10">
+                <input v-model="chapter.name" class="form-control" placeholder="名称">
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label">课程ID</label>
-              <div class="form-group">
-                <input class="form-control" placeholder="课程ID">
+              <div class="col-sm-10">
+                <input v-model="chapter.courseId" class="form-control" placeholder="课程ID">
               </div>
             </div>
           </form>
@@ -123,7 +125,9 @@ name: "chapter.vue",
   components: {Pagination},
   data:function (){
   return{
-    chapters:[]
+    chapter:{},
+    chapters:[],
+    course:{},
   }
   },
   mounted:function () {
@@ -150,16 +154,43 @@ name: "chapter.vue",
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/list", {
         page: page,
         size: _this.$refs.pagination.size,
-      //  courseId: _this.course.id
+    //   courseId: _this.course.id
       }).then((response)=>{
         //Loading.hide();
-        console.log("查询大章列表结果：",response);
+         console.log("查询大章列表结果：",response);
       //  let resp = response.data;
-        // _this.chapters = resp.content.list;
+       // _this.chapters = response.content.list;
         _this.chapters=response.data.list;
-
         _this.$refs.pagination.render(page, response.data.total);
       })
+    },
+    /**
+     * 点击【保存】
+     */
+    save() {
+      let _this = this;
+
+      // 保存校验
+      // if (!Validator.require(_this.chapter.name, "名称")
+      //     || !Validator.length(_this.chapter.courseId, "课程ID", 1, 8)) {
+      //   return;
+      // }
+      // _this.chapter.courseId = _this.course.id;
+      //
+      // Loading.show();
+      _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/save", _this.chapter).then((response)=>{
+        console.log("保存大章列表结果：",response);
+        $(".modal").modal("hide");
+    //   Loading.hide();
+      //   let resp = response.data;
+      //   if (resp.success) {
+      //     $("#form-modal").modal("hide");
+      //     _this.list(1);
+      //     Toast.success("保存成功！");
+      //   } else {
+      //     Toast.warning(resp.message)
+      //   }
+       })
     },
 
   }

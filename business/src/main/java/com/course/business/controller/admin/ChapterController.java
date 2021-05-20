@@ -21,9 +21,15 @@ public class ChapterController {
     @Resource
     private ChapterService chapterService;
     @RequestMapping("/list")
-   public PageDto list(@RequestBody PageDto pageDto){
-        LOG.info("pageDto;{}",pageDto);
-        chapterService.list( pageDto);
+   public PageDto list( @RequestBody PageDto pageDto){
+        LOG.info("pageDto: {}",pageDto);
+        chapterService.list(pageDto);
         return pageDto;
    }
+    @RequestMapping("/save")
+    public ChapterDto save( @RequestBody ChapterDto chapterDto){
+        LOG.info("chapterDto: {}",chapterDto);
+        chapterService.save( chapterDto);
+        return chapterDto;
+    }
 }
