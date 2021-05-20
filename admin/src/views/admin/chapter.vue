@@ -153,13 +153,13 @@ name: "chapter.vue",
      */
     list(page) {
       let _this = this;
-      //Loading.show();
+      Loading.show();
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/list", {
         page: page,
         size: _this.$refs.pagination.size,
     //   courseId: _this.course.id
       }).then((response)=>{
-        //Loading.hide();
+        Loading.hide();
          console.log("查询大章列表结果：",response);
         let resp = response.data;
         _this.chapters = resp.content.list;
@@ -179,10 +179,10 @@ name: "chapter.vue",
       // }
       // _this.chapter.courseId = _this.course.id;
       //
-      // Loading.show();
+       Loading.show();
       _this.$ajax.post("http://127.0.0.1:9000/business/admin/chapter/save", _this.chapter).then((response)=>{
         console.log("保存大章列表结果：",response);
-    //   Loading.hide();
+       Loading.hide();
          let resp = response.data;
         if (resp.success) {
           $("#form-modal").modal("hide");
@@ -199,9 +199,9 @@ name: "chapter.vue",
     del(id) {
       let _this = this;
       Confirm.show("删除大章后不可恢复，确认删除？", function () {
-       // Loading.show();
+        Loading.show();
         _this.$ajax.delete("http://127.0.0.1:9000/business/admin/chapter/delete/"+id).then((response)=>{
-         // Loading.hide();
+          Loading.hide();
           let resp = response.data;
           if (resp.success) {
             _this.list(1);
