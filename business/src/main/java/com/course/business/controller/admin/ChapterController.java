@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/admin/chapter")
@@ -29,9 +29,11 @@ public class ChapterController {
         responseDto.setContent(pageDto);
         return responseDto;
    }
-    @PostMapping("/save")
+/*
+*保存，id有值时更新，无值时新增
+* */
+@PostMapping("/save")
     public ResponseDto save( @RequestBody ChapterDto chapterDto){
-        LOG.info("chapterDto: {}",chapterDto);
         // 保存校验
         ValidatorUtil.require(chapterDto.getName(), "名称");
         ValidatorUtil.require(chapterDto.getCourseId(), "课程ID");

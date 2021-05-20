@@ -23,6 +23,10 @@ import java.util.*;
 public class ChapterService {
     @Resource
     private ChapterMapper chapterMapper;
+
+    /*
+    * 列表查询
+    * */
     public void list(PageDto pageDto){
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         ChapterExample chapterExample = new ChapterExample();
