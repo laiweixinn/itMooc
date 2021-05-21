@@ -18,8 +18,8 @@ create table `chapter` (
                            primary key (`id`)
 ) engine=innodb default charset=utf8mb4 comment='大章';
 
-insert into `chapter` (id, course_id, name) values ('00000001', '00000000', '测试大章01');
-insert into `chapter` (id, course_id, name) values ('00000002', '00000000', '测试大章02');
+insert into `chapter` (id, course_id, name) values ('00000001', '00000001', '测试大章01');
+insert into `chapter` (id, course_id, name) values ('00000002', '00000001', '测试大章02');
 insert into `chapter` (id, course_id, name) values ('00000003', '00000000', '测试大章03');
 insert into `chapter` (id, course_id, name) values ('00000004', '00000000', '测试大章04');
 insert into `chapter` (id, course_id, name) values ('00000005', '00000000', '测试大章05');
