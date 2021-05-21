@@ -28,5 +28,9 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
     </dependency>
+    <dependency>
+        <groupId>com.onlinecourse</groupId>
+        <artifactId>server</artifactId>
+    </dependency>
 </dependencies>
 </project>
