@@ -38,6 +38,9 @@
           <span class="badge badge-info">{{course.time | formatSecond}}</span>
         </p>
         <p>
+          <button v-on:click="toChapter(course)" class="btn btn-white btn-xs btn-info btn-round">
+            大章
+          </button>&nbsp;
           <button v-on:click="edit(course)" class="btn btn-xs btn-info">
           编辑
           </button>
@@ -286,7 +289,14 @@
             }
           })
         });
-      }
+      }, /**
+       * 点击【大章】
+       */
+      toChapter(course) {
+        let _this = this;
+        SessionStorage.set("course", course);
+        _this.$router.push("/business/chapter");
+      },
     }
   }
 </script>
