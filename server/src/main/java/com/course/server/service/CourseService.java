@@ -24,8 +24,11 @@ public class CourseService {
 private static final Logger LOG = LoggerFactory.getLogger(CourseService.class);
     @Resource
     private CourseMapper courseMapper;
-@Resource
-private MyCourseMapper myCourseMapper;
+    @Resource
+    private MyCourseMapper myCourseMapper;
+    @Resource
+    private CourseCategoryService courseCategoryService;
+
     /**
      * 列表查询
      */
@@ -50,6 +53,10 @@ private MyCourseMapper myCourseMapper;
         } else {
             this.update(course);
         }
+
+        //批量保存课程分类
+courseCategoryService.saveBatch(courseDto.getId(),courseDto.getCategorys());
+
     }
 
     /**
