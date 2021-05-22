@@ -138,7 +138,7 @@ name: "chapter.vue",
   mounted:function () {
   let _this = this;
   _this.$refs.pagination.size=5;
-  let course=SessionStorage.get(SESSION_KEY_CHAPTER) ||{};
+  let course=SessionStorage.get(SESSION_KEY_COURSE) ||{};
   if(Tool.isEmpty(course)){
     _this.$router.push("/welcome");
   }
