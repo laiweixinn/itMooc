@@ -144,8 +144,8 @@ name: "chapter.vue",
   }
   _this.course=course;
   _this.list(1);
-  //sidebar激活样式一
-  //this.$parent.activeSidebar("business-chapter-sidebar");
+  //sidebar激活样式方法一
+  this.$parent.activeSidebar("business-course-sidebar");
   },
   methods:{
     /**

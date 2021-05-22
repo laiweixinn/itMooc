@@ -39,7 +39,7 @@
               <td>{{section.id}}</td>
               <td>{{section.title}}</td>
               <td>{{section.video}}</td>
-              <td>{{section.time | formatSecond}}</td>
+              <td>{{section .time | formatSecond}}</td>
               <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
               <td>{{section.sort}}</td>
         <td>
@@ -147,7 +147,7 @@
       _this.chapter = chapter;
       _this.list(1);
       // sidebar激活样式方法一
-      // this.$parent.activeSidebar("business-section-sidebar");
+       this.$parent.activeSidebar("business-course-sidebar");
 
     },
     methods: {
