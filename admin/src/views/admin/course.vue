@@ -61,6 +61,11 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">分类</label>
+                <div class="col-sm-10">
+                  <ul id="tree" class="ztree"></ul>
+                </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">名称</label>
                       <div class="col-sm-10">
@@ -127,6 +132,7 @@
                         <input v-model="course.sort" class="form-control">
                       </div>
                     </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -156,6 +162,7 @@
     mounted: function() {
       let _this = this;
       _this.$refs.pagination.size = 5;
+      _this.initTree();
       _this.list(1);
       // sidebar激活样式方法一
       // this.$parent.activeSidebar("business-course-sidebar");
@@ -252,6 +259,55 @@
         SessionStorage.set("course", course);
         _this.$router.push("/business/chapter");
       },
+      initTree() {
+       let setting={
+         check:{
+           enable:true
+         },
+         data:{
+           simpleData:{
+             enable: true
+           }
+         }
+       };
+       let zNodes=[
+         {id:1,pID:0,name:"随意勾选 1",open:true},
+         {id:11,pID:1,name:"随意勾选 1-1",open:true},
+         {id:111,pID:11,name:"随意勾选 1-1-1"},
+         {id:112,pID:11,name:"随意勾选 1-1-2"},
+         {id:12,pID:1,name:"随意勾选 1-2",open:true},
+         {id:121,pID:12,name:"随意勾选 1-2-1"},
+         {id:122,pID:12,name:"随意勾选 1-2-2"},
+         {id:2,pID:0,name:"随意勾选 2",checked:true,open:true},
+         {id:21,pID:2,name:"随意勾选 2-1"},
+         {id:22,pID:2,name:"随意勾选 2-2",open:true},
+         {id:221,pID:22,name:"随意勾选 2-2-1",checked:true},
+         {id:222,pID:22,name:"随意勾选 2-2-2"},
+         {id:23,pID:2,name:"随意勾选 2-3"},
+
+       ];
+$.fn.zTree.init($("#tree"),setting,zNodes);
+        // let setting = {
+        //   check: {
+        //     enable: true
+        //   },
+        //   data: {
+        //     simpleData: {
+        //       idKey: "id",
+        //       pIdKey: "parent",
+        //       rootPId: "00000000",
+        //       enable: true
+        //     }
+        //   }
+        // };
+
+        // let zNodes = _this.categorys;
+        //
+        // _this.tree = $.fn.zTree.init($("#tree"), setting, zNodes);
+
+        // 展开所有的节点
+        // _this.tree.expandAll(true);
+      }
     }
   }
 </script>
