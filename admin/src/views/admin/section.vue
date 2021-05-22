@@ -39,7 +39,7 @@
               <td>{{section.id}}</td>
               <td>{{section.title}}</td>
               <td>{{section.video}}</td>
-              <td>{{course.time | formatSecond}}</td>
+              <td>{{section.time | formatSecond}}</td>
               <td>{{SECTION_CHARGE | optionKV(section.charge)}}</td>
               <td>{{section.sort}}</td>
         <td>
