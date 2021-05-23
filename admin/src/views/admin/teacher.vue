@@ -85,7 +85,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">头像</label>
                       <div class="col-sm-10">
-                        <input v-model="teacher.image" class="form-control">
+                        <input type="file" v-on:change="uploadImage()" id="file-upload-input">
                       </div>
                     </div>
                     <div class="form-group">
@@ -123,13 +123,13 @@
   export default {
     components: {Pagination},
     name: "business-teacher",
-    data: function() {
+    data: function () {
       return {
         teacher: {},
         teachers: [],
       }
     },
-    mounted: function() {
+    mounted: function () {
       let _this = this;
       _this.$refs.pagination.size = 5;
       _this.list(1);
@@ -165,7 +165,7 @@
         _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/list', {
           page: page,
           size: _this.$refs.pagination.size,
-        }).then((response)=>{
+        }).then((response) => {
           Loading.hide();
           let resp = response.data;
           _this.teachers = resp.content.list;
@@ -182,19 +182,19 @@
 
         // 保存校验
         if (1 != 1
-                || !Validator.require(_this.teacher.name, "姓名")
-                || !Validator.length(_this.teacher.name, "姓名", 1, 50)
-                || !Validator.length(_this.teacher.nickname, "昵称", 1, 50)
-                || !Validator.length(_this.teacher.image, "头像", 1, 100)
-                || !Validator.length(_this.teacher.position, "职位", 1, 50)
-                || !Validator.length(_this.teacher.motto, "座右铭", 1, 50)
-                || !Validator.length(_this.teacher.intro, "简介", 1, 500)
+            || !Validator.require(_this.teacher.name, "姓名")
+            || !Validator.length(_this.teacher.name, "姓名", 1, 50)
+            || !Validator.length(_this.teacher.nickname, "昵称", 1, 50)
+            || !Validator.length(_this.teacher.image, "头像", 1, 100)
+            || !Validator.length(_this.teacher.position, "职位", 1, 50)
+            || !Validator.length(_this.teacher.motto, "座右铭", 1, 50)
+            || !Validator.length(_this.teacher.intro, "简介", 1, 500)
         ) {
           return;
         }
 
         Loading.show();
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/save', _this.teacher).then((response)=>{
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/teacher/save', _this.teacher).then((response) => {
           Loading.hide();
           let resp = response.data;
           if (resp.success) {
@@ -214,7 +214,7 @@
         let _this = this;
         Confirm.show("删除讲师后不可恢复，确认删除？", function () {
           Loading.show();
-          _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/teacher/delete/' + id).then((response)=>{
+          _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/teacher/delete/' + id).then((response) => {
             Loading.hide();
             let resp = response.data;
             if (resp.success) {
@@ -222,6 +222,23 @@
               Toast.success("删除成功！");
             }
           })
+        });
+      },
+
+      // afterUpload(resp) {
+      //   let _this = this;
+      //   let image = resp.content.path;
+      //   _this.teacher.image = image;
+      // }
+      uploadImage() {
+        let _this = this;
+        let formData = new window.FormData();
+        //key:"file"必须和后端controller参数名一致
+        formData.append('file', document.querySelector('#file-upload-input').files[0]);
+        Loading.show();
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/upload', formData).then((response) => {
+          Loading.hide();
+          let resp = response.data;
         });
       }
     }
