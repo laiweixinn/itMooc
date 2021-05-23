@@ -17,7 +17,7 @@
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
-                    <th>id</th>
+            <th>id</th>
             <th>相对路径</th>
             <th>文件名</th>
             <th>后缀</th>
