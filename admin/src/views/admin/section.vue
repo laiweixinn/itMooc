@@ -83,12 +83,21 @@
                         <p class="form-control-static">{{chapter.name}}</p>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label">视频</label>
-                      <div class="col-sm-10">
-                        <input v-model="section.video" class="form-control">
-                      </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">视频</label>
+                <div class="col-sm-10">
+                  <file v-bind:input-id="'video-upload'"
+                       v-bind:text="'上传VOD'"
+                       v-bind:suffixs="['mp4']"
+                       v-bind:use="FILE_USE.COURSE.key"
+                       v-bind:after-upload="afterUpload"></file>
+                  <div v-show="section.video" class="row">
+                    <div class="col-md-10">
+                      <video v-bind:src="section.video" controls="controls"></video>
                     </div>
+                  </div>
+                </div>
+              </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">时长</label>
                       <div class="col-sm-10">
@@ -123,14 +132,16 @@
 
 <script>
   import Pagination from "../../components/pagination";
+  import File from "../../components/file";
   export default {
-    components: {Pagination},
+    components: {Pagination,File},
     name: "business-section",
     data: function() {
       return {
         section: {},
         sections: [],
         SECTION_CHARGE:SECTION_CHARGE,
+        FILE_USE:FILE_USE,
         course:{},
         chapter:{},
       }
@@ -235,7 +246,20 @@
             }
           })
         });
-      }
+      },
+
+      afterUpload(resp) {
+        let _this = this;
+        let video = resp.content.path;
+        _this.section.video = video;
+      },
     }
   }
 </script>
+<style type="text/css" scoped>
+video{
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+</style>
